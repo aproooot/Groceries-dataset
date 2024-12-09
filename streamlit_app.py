@@ -40,7 +40,7 @@ groceriesDS_clean = df.copy()
 groceriesDS_clean.set_index('Date', inplace=True)
 
 # Create Tabs
-tab1, tab2, tab3 = st.tabs(["📊 Data Visualization", "🔍 Apriori Calculation", "📈 Association Rules"])
+tab1, tab2, tab3, tab4 = st.tabs(["📊 Data Visualization", "🔍 Apriori Calculation", "📈 Association Rules", "Dataset Overview"] )
 
 # **Tab 1: Data Visualization**
 with tab1:
@@ -170,3 +170,40 @@ with tab3:
             st.error(f"Error generating association rules: {str(e)}")
     else:
         st.error("No frequent itemsets found. Try adjusting the minimum support value.")
+
+    # **Tab 4: Dataset Overview**
+    with tab4:
+        st.header("Dataset Overview")
+        st.write("The dataset captures transactional data from a grocery store, where each row corresponds to an individual purchase order.")
+        
+        st.markdown("### **Key Features**")
+        st.markdown("""
+            **Number of Transactions:** 38,765  
+            **Data Format:** Rows represent transactions, and items purchased are recorded as part of the order  
+            **Analysis Techniques Applied:** Apriori Algorithm and K-means Clustering
+            """)
+        
+        st.markdown('### **Why did we choose Apriori Algorithm and K-means Clustering?**')
+        st.markdown('#### **Apriori Algorithm**')
+        st.markdown('**Purpose:** The Apriori algorithm is used for frequent itemset mining and learning association rules. It identifies frequently purchased items and calculates metrics like support, confidence, and lift to derive patterns in customer behavior.')
+        st.markdown("""
+            -  Enables discovery of significant trends in purchase data.
+            -  Provides actionable insights for product bundling, promotions, and inventory management.
+            """)
+
+        st.markdown('#### **K-means Clustering**')
+        st.markdown('**Purpose:** K-means clustering groups transactions or customers based on purchasing patterns to identify meaningful clusters.')
+        st.markdown("""
+            -  Segments customers into groups with similar preferences (e.g., frequent shoppers, gourmet buyers).
+            -  Enhances the effectiveness of Apriori by applying it to specific clusters, uncovering nuanced patterns.
+            """)
+        
+        st.markdown('### **Research Questions**')
+        st.markdown('(We can answer these questions after we get the results from the selected techniques.)')
+        st.markdown("""
+            - What are the most common product combinations purchased together?
+            - How do purchase patterns vary by time of day or day of the week?
+            """)
+        
+        st.markdown('##### This table shows the first 50 rows of data from the groceries dataset.')
+        st.table(df.head(50))
